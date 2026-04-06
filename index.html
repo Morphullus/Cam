@@ -17,18 +17,25 @@
             margin: 10px 0;
         }
         img {
-            width: 100%; /* promijeni po potrebi */
-            max-width: 350px;
+            width: 100%;        /* automatski prati širinu ekrana */
+            max-width: 400px;   /* maksimalna širina za desktop */
             height: auto;
             display: block;
             margin: 0 auto;
         }
-        iframe {
-            width: 100%; 
-            max-width: 300px;
-            height: 127px; 
-            border: none; 
-            margin-top: 2px;
+        .iframe-wrapper {
+            width: 100%;
+            max-width: 300px;   /* maksimalna širina iframe */
+            height: 100px;      /* vidljivi dio */
+            overflow: hidden;   /* uklanja scroll */
+            margin: 0 auto;
+        }
+        .iframe-wrapper iframe {
+            width: 100%;
+            height: 145px;      /* stvarna visina iframe-a */
+            border: none;
+            position: relative;
+            top: -20px;         /* pomak za crop */
         }
     </style>
 </head>
@@ -40,7 +47,9 @@
     <a href="https://www.whatsupcams.com/hr/webcams/hrvatska/sibensko-kniniska/murter-hr/plaza-slanica-murter-web-kamera/" target="_blank">
         <img id="img1" src="https://cdn.whatsupcams.com/snapshot/hr_murter03.jpg" alt="Murter Slanica snapshot">
     </a>
-    <iframe src="https://pljusak.com/sticker300.php?stanica=murter" scrolling="no"></iframe>
+    <div class="iframe-wrapper">
+        <iframe src="https://pljusak.com/sticker300.php?stanica=murter"></iframe>
+    </div>
 </div>
 
 <!-- KAMERA 2 --> 
@@ -49,7 +58,9 @@
     <a href="https://www.whatsupcams.com/hr/webcams/hrvatska/zadarska/zadar-hr/zadar-most//" target="_blank">
         <img id="img2" src="https://cdn.whatsupcams.com/snapshot/hr_zadar2.jpg" alt="Zadar Most snapshot">
     </a>
-    <iframe src="https://pljusak.com/sticker300.php?stanica=km_zadar" scrolling="no"></iframe>
+    <div class="iframe-wrapper">
+        <iframe src="https://pljusak.com/sticker300.php?stanica=km_zadar"></iframe>
+    </div>
 </div>
 
 <!-- KAMERA 3 -->
@@ -58,7 +69,9 @@
     <a href="https://m.hak.hr/kamera.asp?g=1&k=94" target="_blank">
         <img id="img3" src="https://m.hak.hr/cam.asp?id=741&t=1763914841225" alt="Sveti Rok snapshot">
     </a>
-    <iframe src="https://pljusak.com/sticker300.php?stanica=opsenica" scrolling="no"></iframe>
+    <div class="iframe-wrapper">
+        <iframe src="https://pljusak.com/sticker300.php?stanica=opsenica"></iframe>
+    </div>
 </div>
 
 <!-- KAMERA 4 -->
@@ -67,7 +80,9 @@
     <a href="https://www.livecamcroatia.com/hr/kamera/velika-gorica-centar" target="_blank">
         <img id="img4" src="https://cdn.whatsupcams.com/snapshot/hr_vgorica01.jpg" alt="Velika Gorica snapshot">
     </a>
-    <iframe src="https://pljusak.com/sticker300.php?stanica=aeropleso" scrolling="no"></iframe>
+    <div class="iframe-wrapper">
+        <iframe src="https://pljusak.com/sticker300.php?stanica=aeropleso"></iframe>
+    </div>
 </div>
 
 <!-- KAMERA 5 -->
@@ -76,7 +91,9 @@
     <a href="https://www.whatsupcams.com/en/webcams/croatia/zagreb-county/zagreb-center/zagreb-jarun-wakeboard-wakeskate/" target="_blank">
         <img id="img5" src="https://cdn.whatsupcams.com/snapshot/hr_zgjarun.jpg" alt="Zagreb Jarun snapshot">
     </a>
-    <iframe src="https://pljusak.com/sticker300.php?stanica=siget" scrolling="no"></iframe>
+    <div class="iframe-wrapper">
+        <iframe src="https://pljusak.com/sticker300.php?stanica=siget"></iframe>
+    </div>
 </div>
 
 <!-- KAMERA 6 -->
@@ -85,7 +102,9 @@
     <a href="https://www.whatsupcams.com/en/webcams/croatia/zagreb-county/zagreb/sljeme-medvednica-ski-center-near-zagreb//" target="_blank">
         <img id="img6" src="https://cdn.whatsupcams.com/snapshot/hr_sljeme2.jpg" alt="Sljeme snapshot">
     </a>
-    <iframe src="https://pljusak.com/sticker300.php?stanica=puntijarka" scrolling="no"></iframe>
+    <div class="iframe-wrapper">
+        <iframe src="https://pljusak.com/sticker300.php?stanica=puntijarka"></iframe>
+    </div>
 </div>
 
 <script>
