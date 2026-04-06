@@ -18,7 +18,7 @@
         }
         img {
             width: 100%;        /* slike su responsive */
-            max-width: 700px;   /* maksimalna širina na desktopu */
+            max-width: 600px;   /* maksimalna širina na desktopu */
             height: auto;
             display: block;
             margin: 0 auto;
@@ -35,8 +35,10 @@
             width: 300px;       /* fiksna širina */
             height: 145px;      /* stvarna visina sadržaja */
             border: none;
-            position: relative;
+            position: absolute; /* absolute za crop */
             top: -18px;         /* pomak gore za crop */
+            left: 0;
+            pointer-events: auto; /* omogućuje klik unutar iframe-a */
         }
     </style>
 </head>
