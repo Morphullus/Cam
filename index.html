@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kamera Plaže</title>
+<style>
+  body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Ostavio background prazan, sliku ćeš dodati kasnije */
+    /* background-image: url('tvoja-glavna-slika.jpg'); */
+    /* background-size: cover; background-position: center; */
+  }
+
+  .cam-wrapper {
+    width: 90%;
+    max-width: 400px;
+    margin-bottom: 100px;
+    text-align: center;
+  }
+
+  .cam-wrapper h2 {
+    margin: 0 0 5px 0;
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  .cam-wrapper h3 {
+    margin: 0 0 10px 0;
+    font-size: 16px;
+    font-style: italic;
+  }
+
+  .cam-wrapper a img {
+    width: 100%;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: transform 0.3s;
+  }
+
+  .cam-wrapper a img:hover {
+    transform: scale(1.05);
+  }
+
+  .iframe-container {
+    width: 100%;
+    max-width: 300px;
+    height: 145px;
+    overflow: hidden;
+    margin: 10px auto 0 auto;
+    position: relative;
+    border-radius: 8px;
+  }
+
+  .iframe-container iframe {
+    width: 133%;
+    height: 200px;
+    border: 0;
+  }
+
+  .iframe-container a.overlay-link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+  }
+</style>
+</head>
+<body>
+
+<div id="container"></div>
+
+<script>
+const container = document.getElementById("container");
+
+// Podaci za 6 kamera
+const cameras = [
+  {
+    city: "Murter 1",
+    beach: "Murter plaža",
+    img: "https://cdn.whatsupcams.com/snapshot/hr_murter03.jpg",
+    camLink: "https://www.whatsupcams.com/hr/webcams/hrvatska/sibensko-kniniska/murter-hr/plaza-slanica-murter-web-kamera/",
+    iframeLink: "https://pljusak.com/meteo.php?stanica=murter#https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=43.8237&lon=15.5832&altitude=4"
+  },
+  {
+    city: "Zadar",
+    beach: "Plaža Zadar",
+    img: "https://cdn.whatsupcams.com/snapshot/hr_zadar01.jpg",
+    camLink: "https://www.whatsupcams.com/hr/webcams/hrvatska/zadar/zadar-beach-web-camera/",
+    iframeLink: "https://pljusak.com/meteo.php?stanica=zadar#https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=44.1194&lon=15.2314&altitude=4"
+  },
+  {
+    city: "Split",
+    beach: "Plaža Split",
+    img: "https://cdn.whatsupcams.com/snapshot/hr_split01.jpg",
+    camLink: "https://www.whatsupcams.com/hr/webcams/hrvatska/split/split-beach-web-camera/",
+    iframeLink: "https://pljusak.com/meteo.php?stanica=split#https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=43.5081&lon=16.4402&altitude=4"
+  },
+  {
+    city: "Rovinj",
+    beach: "Plaža Rovinj",
+    img: "https://cdn.whatsupcams.com/snapshot/hr_rovinj01.jpg",
+    camLink: "https://www.whatsupcams.com/hr/webcams/hrvatska/rovinj/rovinj-beach-web-camera/",
+    iframeLink: "https://pljusak.com/meteo.php?stanica=rovinj#https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=45.0810&lon=13.6384&altitude=4"
+  },
+  {
+    city: "Makarska",
+    beach: "Plaža Makarska",
+    img: "https://cdn.whatsupcams.com/snapshot/hr_makarska01.jpg",
+    camLink: "https://www.whatsupcams.com/hr/webcams/hrvatska/makarska/makarska-beach-web-camera/",
+    iframeLink: "https://pljusak.com/meteo.php?stanica=makarska#https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=43.2959&lon=17.0105&altitude=4"
+  },
+  {
+    city: "Pula",
+    beach: "Plaža Pula",
+    img: "https://cdn.whatsupcams.com/snapshot/hr_pula01.jpg",
+    camLink: "https://www.whatsupcams.com/hr/webcams/hrvatska/pula/pula-beach-web-camera/",
+    iframeLink: "https://pljusak.com/meteo.php?stanica=pula#https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=44.8682&lon=13.8481&altitude=4"
+  }
+];
+
+cameras.forEach(cam => {
+  const div = document.createElement("div");
+  div.className = "cam-wrapper";
+
+  // Grad iznad plaže
+  const h2 = document.createElement("h2");
+  h2.textContent = cam.city;
+  div.appendChild(h2);
+
+  // Naziv plaže
+  const h3 = document.createElement("h3");
+  h3.textContent = cam.beach;
+  div.appendChild(h3);
+
+  // Slika kamere
+  const a = document.createElement("a");
+  a.href = cam.camLink;
+  a.target = "_blank";
+
+  const img = document.createElement("img");
+  img.src = cam.img + "?" + new Date().getTime();
+  a.appendChild(img);
+  div.appendChild(a);
+
+  // Iframe s overlay linkom
+  const iframeContainer = document.createElement("div");
+  iframeContainer.className = "iframe-container";
+
+  const iframe = document.createElement("iframe");
+  iframe.src = cam.iframeLink.replace(/#.*$/, ""); // stvarni iframe URL
+  iframeContainer.appendChild(iframe);
+
+  const overlay = document.createElement("a");
+  overlay.href = cam.iframeLink;
+  overlay.target = "_blank";
+  overlay.className = "overlay-link";
+  iframeContainer.appendChild(overlay);
+
+  div.appendChild(iframeContainer);
+
+  container.appendChild(div);
+
+  // Auto-refresh slike svakih 30s
+  setInterval(() => {
+    img.src = cam.img + "?" + new Date().getTime();
+  }, 30000);
+});
+</script>
+
+</body>
+</html>
